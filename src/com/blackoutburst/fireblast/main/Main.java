@@ -1,6 +1,7 @@
 package com.blackoutburst.fireblast.main;
 
 import com.blackoutburst.fireblast.core.BlastPlayer;
+import com.blackoutburst.fireblast.core.Core;
 import com.blackoutburst.fireblast.utils.ScoreboardManager;
 import org.bukkit.*;
 import org.bukkit.event.EventHandler;
@@ -23,17 +24,12 @@ public class Main extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         getServer().getPluginManager().registerEvents(this, this);
-        spawn = new Location(Bukkit.getWorld("world"), 8.5f, 5.0f, 8.5f, 0, 0);
+        spawn = new Location(Bukkit.getWorld("world"), 0.5f, 5.0f, 0.5f, 0, 0);
     }
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        event.getPlayer().setHealth(20);
-        event.getPlayer().setSaturation(20);
-        event.getPlayer().setFoodLevel(20);
-        event.getPlayer().setGameMode(GameMode.ADVENTURE);
-        event.getPlayer().getInventory().clear();
-        event.getPlayer().teleport(spawn);
+        Core.resetPlayer(event.getPlayer());
 
         BlastPlayer bp = new BlastPlayer(event.getPlayer());
 
