@@ -48,14 +48,16 @@ public class Main extends JavaPlugin implements Listener {
 
     @EventHandler
     public void onMove(PlayerMoveEvent event) {
-        if (gameRunning) {
-            event.getPlayer().setGameMode(GameMode.SPECTATOR);
-            BlastPlayer bp = BlastPlayer.getFromPlayer(event.getPlayer());
-            if (bp != null) bp.setAlive(false);
-            Core.checkEndGame();
-            Bukkit.broadcastMessage(event.getPlayer().getDisplayName()+" §efell into the void! §a"+Utils.getNumberOfPlayerAlive()+" player remaining!");
+        if (event.getPlayer().getLocation().getBlockY() < -20) {
+            if (gameRunning) {
+                event.getPlayer().setGameMode(GameMode.SPECTATOR);
+                BlastPlayer bp = BlastPlayer.getFromPlayer(event.getPlayer());
+                if (bp != null) bp.setAlive(false);
+                Core.checkEndGame();
+                Bukkit.broadcastMessage(event.getPlayer().getDisplayName()+" §efell into the void! §a"+Utils.getNumberOfPlayerAlive()+" player remaining!");
+            }
+            event.getPlayer().teleport(spawn);
         }
-        event.getPlayer().teleport(spawn);
     }
 
     @EventHandler
@@ -82,5 +84,4 @@ public class Main extends JavaPlugin implements Listener {
             gameRunning = false;
         }
     }
-
 }
