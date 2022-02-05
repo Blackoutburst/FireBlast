@@ -21,6 +21,7 @@ public class Main extends JavaPlugin implements Listener {
 
     public static List<BlastPlayer> players = new ArrayList<>();
     public static boolean gameRunning = false;
+    public static int gameTime;
 
     public static Location spawn;
 
@@ -29,6 +30,7 @@ public class Main extends JavaPlugin implements Listener {
     public void onEnable() {
         getServer().getPluginManager().registerEvents(this, this);
         spawn = new Location(Bukkit.getWorld("world"), 0.5f, 5.0f, 0.5f, 0, 0);
+        Core.gameTimer();
     }
 
     @EventHandler
