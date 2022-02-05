@@ -24,7 +24,7 @@ public class Utils {
     }
 
     public static void giveItem(Player p) {
-        ItemStack menu = new ItemStack(Material.NETHER_STAR, 1);
+        ItemStack menu = new ItemStack(Material.BLAZE_ROD, 1);
         ItemMeta menuMeta = menu.getItemMeta();
 
         p.getInventory().clear();

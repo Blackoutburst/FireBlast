@@ -9,14 +9,13 @@ import com.blackoutburst.fireblast.utils.Utils;
 import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Fireball;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
-import org.bukkit.event.player.PlayerDropItemEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
@@ -57,6 +56,14 @@ public class Main extends JavaPlugin implements Listener {
                 Bukkit.broadcastMessage(event.getPlayer().getDisplayName()+" §efell into the void! §a"+Utils.getNumberOfPlayerAlive()+" player remaining!");
             }
             event.getPlayer().teleport(spawn);
+        }
+    }
+
+    @EventHandler
+    public void onPlayerInteract(PlayerInteractEvent event) {
+        if (event.getPlayer().getItemInHand().equals(Material.BLAZE_ROD) && event.getAction().equals(Action.LEFT_CLICK_AIR) ||
+                event.getPlayer().getItemInHand().equals(Material.BLAZE_ROD) && event.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
+            event.getPlayer().launchProjectile(Fireball.class);
         }
     }
 
