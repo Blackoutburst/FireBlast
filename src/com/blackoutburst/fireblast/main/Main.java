@@ -5,6 +5,8 @@ import com.blackoutburst.fireblast.core.Core;
 import com.blackoutburst.fireblast.utils.ScoreboardManager;
 import com.blackoutburst.fireblast.utils.Utils;
 import org.bukkit.*;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -79,5 +81,15 @@ public class Main extends JavaPlugin implements Listener {
         if (players.size() == 0) {
             gameRunning = false;
         }
+    }
+
+    @Override
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        switch (command.getName().toLowerCase()) {
+            case "start": break;
+            case "end": break;
+            default: return (true);
+        }
+        return (true);
     }
 }

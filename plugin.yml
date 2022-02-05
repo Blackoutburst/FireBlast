@@ -3,4 +3,11 @@ name: FireBlast
 version: 0.1
 api-version: 1.13
 author: Blackoutburst
-description: Fire Blast
+description: Don't die lol
+commands:
+  start:
+    description: Start the game
+    usage: /start
+  end:
+    description: End the game
+    usage: /end
