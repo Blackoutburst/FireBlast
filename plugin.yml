@@ -1,0 +1,6 @@
+main: com.blackoutburst.fireblast.main.Main
+name: FireBlast
+version: 0.1
+api-version: 1.13
+author: Blackoutburst
+description: Fire Blast
