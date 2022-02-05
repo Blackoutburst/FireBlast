@@ -35,8 +35,8 @@ public class Main extends JavaPlugin implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        Core.resetPlayer(event.getPlayer());
         BlastPlayer bp = new BlastPlayer(event.getPlayer());
+        Core.resetPlayer(bp);
         ScoreboardManager.init(bp);
         players.add(bp);
         ScoreboardManager.updatePlayers();

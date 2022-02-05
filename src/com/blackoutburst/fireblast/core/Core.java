@@ -4,7 +4,6 @@ import com.blackoutburst.fireblast.main.Main;
 import com.blackoutburst.fireblast.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
-import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class Core {
@@ -31,14 +30,25 @@ public class Core {
     public static void endGame() {
         Main.gameRunning = false;
         BlastPlayer winner = null;
-        
+
         for (BlastPlayer bp : Main.players) {
             if (bp.isAlive()) winner = bp;
             resetPlayer(bp);
         }
 
-        if (winner != null)
-            Bukkit.broadcastMessage(winner.getPlayer().getDisplayName()+" §ewon the game!");
+        if (winner != null) {
+            final int minutes = Main.gameTime / 60;
+            final int seconds = Main.gameTime % 60;
+            final String time = String.format("%d:%02d", minutes, seconds);
+
+            Bukkit.broadcastMessage("§6§m----------------------------------------");
+            Bukkit.broadcastMessage("");
+            Bukkit.broadcastMessage(Utils.centerText("§cTime: §r"+time));
+            Bukkit.broadcastMessage("");
+            Bukkit.broadcastMessage(Utils.centerText(winner.getPlayer().getDisplayName()+" §ewon the game!"));
+            Bukkit.broadcastMessage("");
+            Bukkit.broadcastMessage("§6§m----------------------------------------");
+        }
     }
 
     public static void checkEndGame() {
