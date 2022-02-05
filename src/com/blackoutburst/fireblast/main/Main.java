@@ -66,7 +66,10 @@ public class Main extends JavaPlugin implements Listener {
     public void onPlayerInteract(PlayerInteractEvent event) {
         if (gameRunning && event.getPlayer().getItemInHand().getType().equals(Material.BLAZE_ROD) && event.getAction() == Action.LEFT_CLICK_AIR ||
                 gameRunning && event.getPlayer().getItemInHand().getType().equals(Material.BLAZE_ROD) && event.getAction() == Action.LEFT_CLICK_BLOCK) {
-            event.getPlayer().launchProjectile(Fireball.class);
+            Fireball fireball = event.getPlayer().launchProjectile(Fireball.class);
+            fireball.setVelocity(fireball.getVelocity().multiply(3));
+            fireball.setIsIncendiary(false);
+            fireball.setYield(5);
         }
     }
 
