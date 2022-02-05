@@ -1,5 +1,7 @@
 package com.blackoutburst.fireblast.main;
 
+import com.blackoutburst.fireblast.commands.CommandEnd;
+import com.blackoutburst.fireblast.commands.CommandStart;
 import com.blackoutburst.fireblast.core.BlastPlayer;
 import com.blackoutburst.fireblast.core.Core;
 import com.blackoutburst.fireblast.utils.ScoreboardManager;
@@ -86,8 +88,8 @@ public class Main extends JavaPlugin implements Listener {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         switch (command.getName().toLowerCase()) {
-            case "start": break;
-            case "end": break;
+            case "start": new CommandStart().execute(); break;
+            case "end": new CommandEnd().execute(); break;
             default: return (true);
         }
         return (true);
