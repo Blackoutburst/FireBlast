@@ -2,35 +2,43 @@ package com.blackoutburst.fireblast.core;
 
 import com.blackoutburst.fireblast.main.Main;
 import com.blackoutburst.fireblast.utils.Utils;
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class Core {
 
-    public static void resetPlayer(Player p) {
-        p.setHealth(20);
-        p.setSaturation(20);
-        p.setFoodLevel(20);
-        p.setGameMode(GameMode.ADVENTURE);
-        p.getInventory().clear();
-        p.teleport(Main.spawn);
+    public static void resetPlayer(BlastPlayer p) {
+        p.getPlayer().setHealth(20);
+        p.getPlayer().setSaturation(20);
+        p.getPlayer().setFoodLevel(20);
+        p.getPlayer().setGameMode(GameMode.ADVENTURE);
+        p.getPlayer().getInventory().clear();
+        p.getPlayer().teleport(Main.spawn);
+        p.setAlive(true);
     }
 
     public static void startGame() {
         Main.gameTime = 0;
         Main.gameRunning = true;
         for (BlastPlayer bp : Main.players) {
-            resetPlayer(bp.getPlayer());
+            resetPlayer(bp);
             Utils.giveItem(bp.getPlayer());
         }
     }
 
     public static void endGame() {
         Main.gameRunning = false;
+        BlastPlayer winner = null;
+        
         for (BlastPlayer bp : Main.players) {
-            resetPlayer(bp.getPlayer());
+            if (bp.isAlive()) winner = bp;
+            resetPlayer(bp);
         }
+
+        if (winner != null)
+            Bukkit.broadcastMessage(winner.getPlayer().getDisplayName()+" §ewon the game!");
     }
 
     public static void checkEndGame() {

@@ -26,7 +26,6 @@ public class Main extends JavaPlugin implements Listener {
 
     public static Location spawn;
 
-
     @Override
     public void onEnable() {
         getServer().getPluginManager().registerEvents(this, this);
@@ -37,12 +36,9 @@ public class Main extends JavaPlugin implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Core.resetPlayer(event.getPlayer());
-
         BlastPlayer bp = new BlastPlayer(event.getPlayer());
-
         ScoreboardManager.init(bp);
         players.add(bp);
-
         ScoreboardManager.updatePlayers();
     }
 

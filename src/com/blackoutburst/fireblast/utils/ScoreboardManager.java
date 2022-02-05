@@ -15,9 +15,9 @@ public class ScoreboardManager {
 	public static void init(BlastPlayer bp) {
 		Board board = new Board(bp.getPlayer());
 		
-		board.setTitle("§6Quake");
+		board.setTitle("§cFire §6Blast");
 		board.set(15, "§b§m--------------------"); 
-		board.set(14, "Map: §aSpawn");
+		board.set(14, "Map: §aCookie");
 		board.set(13, "Time: §a0:00");
 		board.set(12, " "); 
 		board.set(2, "  ");
