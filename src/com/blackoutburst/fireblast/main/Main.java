@@ -13,6 +13,7 @@ import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Fireball;
+import org.bukkit.entity.Player;
 import org.bukkit.entity.SmallFireball;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -82,7 +83,10 @@ public class Main extends JavaPlugin implements Listener {
 
     @EventHandler
     public void onEntityDamage(EntityDamageEvent event) {
-        System.out.println(event.getCause().toString());
+        if (event.getEntity() instanceof Player)
+            ((Player)event.getEntity()).setHealth(20);
+        if (event.getCause() != EntityDamageEvent.DamageCause.ENTITY_EXPLOSION)
+            event.setCancelled(true);
     }
 
     @EventHandler
