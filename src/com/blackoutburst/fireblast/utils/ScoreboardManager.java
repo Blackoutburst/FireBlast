@@ -31,7 +31,7 @@ public class ScoreboardManager {
   			if (i < Main.players.size()) {
 	  			for (BlastPlayer bp : new ArrayList<>(Main.players)) {
 					BlastPlayer q = Main.players.get(i);
-	  				bp.getBoard().set(11 - i, q.getPlayer().getDisplayName());
+	  				bp.getBoard().set(11 - i, q.isAlive() ? q.getPlayer().getDisplayName() : "   ");
 	  			}
   			} else {
   				for (BlastPlayer bp : new ArrayList<>(Main.players)) {

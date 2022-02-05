@@ -6,7 +6,11 @@ import com.blackoutburst.fireblast.utils.ScoreboardManager;
 import org.bukkit.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.FoodLevelChangeEvent;
+import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -37,6 +41,31 @@ public class Main extends JavaPlugin implements Listener {
         players.add(bp);
 
         ScoreboardManager.updatePlayers();
+    }
+
+    @EventHandler
+    public void onMove(PlayerMoveEvent event) {
+        if (gameRunning) {
+            event.getPlayer().setGameMode(GameMode.SPECTATOR);
+            BlastPlayer bp = BlastPlayer.getFromPlayer(event.getPlayer());
+            if (bp != null) bp.setAlive(false);
+        }
+        event.getPlayer().teleport(spawn);
+    }
+
+    @EventHandler
+    public void onItemDrop(PlayerDropItemEvent event) {
+        event.setCancelled(gameRunning);
+    }
+
+    @EventHandler
+    public void onEntityDamage(EntityDamageEvent event) {
+        event.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onFoodLevelChange(FoodLevelChangeEvent event) {
+        event.setCancelled(true);
     }
 
     @EventHandler
