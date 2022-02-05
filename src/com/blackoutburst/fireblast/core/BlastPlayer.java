@@ -1,5 +1,6 @@
 package com.blackoutburst.fireblast.core;
 
+import com.blackoutburst.fireblast.main.Main;
 import com.blackoutburst.fireblast.utils.Board;
 import org.bukkit.entity.Player;
 
@@ -23,6 +24,15 @@ public class BlastPlayer {
 
     public void setBoard(Board board) {
         this.board = board;
+    }
+
+    public static BlastPlayer getFromPlayer(Player p) {
+        for (BlastPlayer bp : Main.players) {
+            if (bp.player.getUniqueId().equals(p.getUniqueId())) {
+                return (bp);
+            }
+        }
+        return (null);
     }
 
 }
