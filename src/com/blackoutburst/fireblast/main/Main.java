@@ -13,6 +13,7 @@ import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Fireball;
+import org.bukkit.entity.SmallFireball;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -67,7 +68,8 @@ public class Main extends JavaPlugin implements Listener {
         if (gameRunning && event.getPlayer().getItemInHand().getType().equals(Material.BLAZE_ROD) && event.getAction() == Action.LEFT_CLICK_AIR ||
                 gameRunning && event.getPlayer().getItemInHand().getType().equals(Material.BLAZE_ROD) && event.getAction() == Action.LEFT_CLICK_BLOCK) {
             Fireball fireball = event.getPlayer().launchProjectile(Fireball.class);
-            fireball.setVelocity(fireball.getVelocity().multiply(5));
+            fireball.setShooter(null);
+            fireball.setDirection(fireball.getDirection().multiply(5));
             fireball.setIsIncendiary(false);
             fireball.setYield(2);
         }
@@ -80,7 +82,7 @@ public class Main extends JavaPlugin implements Listener {
 
     @EventHandler
     public void onEntityDamage(EntityDamageEvent event) {
-        event.setCancelled(true);
+        System.out.println(event.getCause().toString());
     }
 
     @EventHandler
