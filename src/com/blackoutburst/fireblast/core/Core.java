@@ -33,6 +33,17 @@ public class Core {
         }
     }
 
+    public static void checkEndGame() {
+        int aliveCount = 0;
+
+        for (BlastPlayer bp : Main.players) {
+            if (bp.alive) aliveCount++;
+        }
+        if (aliveCount <= 1) {
+            endGame();
+        }
+    }
+
     public static void gameTimer() {
         new BukkitRunnable(){
             @Override

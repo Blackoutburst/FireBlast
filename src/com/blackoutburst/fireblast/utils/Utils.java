@@ -1,5 +1,7 @@
 package com.blackoutburst.fireblast.utils;
 
+import com.blackoutburst.fireblast.core.BlastPlayer;
+import com.blackoutburst.fireblast.main.Main;
 import net.md_5.bungee.api.ChatColor;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Material;
@@ -10,6 +12,16 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 
 public class Utils {
+
+    public static int getNumberOfPlayerAlive() {
+        int aliveCount = 0;
+
+        for (BlastPlayer bp : Main.players) {
+            if (bp.isAlive()) aliveCount++;
+        }
+
+        return aliveCount;
+    }
 
     public static void giveItem(Player p) {
         ItemStack menu = new ItemStack(Material.NETHER_STAR, 1);

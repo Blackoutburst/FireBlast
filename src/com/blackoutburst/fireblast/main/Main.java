@@ -3,6 +3,7 @@ package com.blackoutburst.fireblast.main;
 import com.blackoutburst.fireblast.core.BlastPlayer;
 import com.blackoutburst.fireblast.core.Core;
 import com.blackoutburst.fireblast.utils.ScoreboardManager;
+import com.blackoutburst.fireblast.utils.Utils;
 import org.bukkit.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -51,6 +52,8 @@ public class Main extends JavaPlugin implements Listener {
             event.getPlayer().setGameMode(GameMode.SPECTATOR);
             BlastPlayer bp = BlastPlayer.getFromPlayer(event.getPlayer());
             if (bp != null) bp.setAlive(false);
+            Core.checkEndGame();
+            Bukkit.broadcastMessage(event.getPlayer().getDisplayName()+" §efell into the void! §a"+Utils.getNumberOfPlayerAlive()+" player remaining!");
         }
         event.getPlayer().teleport(spawn);
     }
