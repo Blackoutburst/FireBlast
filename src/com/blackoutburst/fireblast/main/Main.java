@@ -55,8 +55,8 @@ public class Main extends JavaPlugin implements Listener {
                 event.getPlayer().setGameMode(GameMode.SPECTATOR);
                 BlastPlayer bp = BlastPlayer.getFromPlayer(event.getPlayer());
                 if (bp != null) bp.setAlive(false);
-                Core.checkEndGame();
                 Bukkit.broadcastMessage(event.getPlayer().getDisplayName()+" §efell into the void! §a"+Utils.getNumberOfPlayerAlive()+" player remaining!");
+                Core.checkEndGame();
             }
             event.getPlayer().teleport(spawn);
         }
