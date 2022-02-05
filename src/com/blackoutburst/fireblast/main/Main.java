@@ -6,7 +6,10 @@ import com.blackoutburst.fireblast.core.BlastPlayer;
 import com.blackoutburst.fireblast.core.Core;
 import com.blackoutburst.fireblast.utils.ScoreboardManager;
 import com.blackoutburst.fireblast.utils.Utils;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Fireball;
@@ -61,8 +64,8 @@ public class Main extends JavaPlugin implements Listener {
 
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
-        if (gameRunning && event.getPlayer().getItemInHand().equals(Material.BLAZE_ROD) && event.getAction().equals(Action.LEFT_CLICK_AIR) ||
-                event.getPlayer().getItemInHand().equals(Material.BLAZE_ROD) && event.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
+        if (gameRunning && event.getPlayer().getItemInHand().getType().equals(Material.BLAZE_ROD) && event.getAction() == Action.LEFT_CLICK_AIR ||
+                gameRunning && event.getPlayer().getItemInHand().getType().equals(Material.BLAZE_ROD) && event.getAction() == Action.LEFT_CLICK_BLOCK) {
             event.getPlayer().launchProjectile(Fireball.class);
         }
     }

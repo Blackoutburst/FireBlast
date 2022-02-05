@@ -12,7 +12,7 @@ public class Core {
         p.getPlayer().setHealth(20);
         p.getPlayer().setSaturation(20);
         p.getPlayer().setFoodLevel(20);
-        p.getPlayer().setGameMode(GameMode.ADVENTURE);
+        p.getPlayer().setGameMode(GameMode.SURVIVAL);
         p.getPlayer().getInventory().clear();
         p.getPlayer().teleport(Main.spawn);
         p.setAlive(true);
