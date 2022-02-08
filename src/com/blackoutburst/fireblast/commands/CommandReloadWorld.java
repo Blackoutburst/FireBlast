@@ -1,19 +1,9 @@
 package com.blackoutburst.fireblast.commands;
 
-import com.blackoutburst.fireblast.core.BlockMap;
 import com.blackoutburst.fireblast.utils.Utils;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.YamlConfiguration;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 public class CommandReloadWorld {
 
