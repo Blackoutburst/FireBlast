@@ -17,9 +17,8 @@ public class ScoreboardManager {
 		
 		board.setTitle("§cFire §6Blast");
 		board.set(15, "§b§m--------------------"); 
-		board.set(14, "Map: §aCookie");
-		board.set(13, "Time: §a0:00");
-		board.set(12, " "); 
+		board.set(14, "Time: §a0:00");
+		board.set(13, " ");
 		board.set(2, "  ");
 		board.set(1, "§b§m-------------------- "); 
 		bp.setBoard(board);
@@ -27,15 +26,15 @@ public class ScoreboardManager {
 	
   	
   	public static void updatePlayers() {
-  		for (int i = 0; i < 9; i++) {
+  		for (int i = 0; i < 10; i++) {
   			if (i < Main.players.size()) {
 	  			for (BlastPlayer bp : new ArrayList<>(Main.players)) {
 					BlastPlayer q = Main.players.get(i);
-	  				bp.getBoard().set(11 - i, q.isAlive() ? q.getPlayer().getDisplayName() : "   ");
+	  				bp.getBoard().set(12 - i, q.isAlive() ? q.getPlayer().getDisplayName() : "   ");
 	  			}
   			} else {
   				for (BlastPlayer bp : new ArrayList<>(Main.players)) {
-  					bp.getBoard().set(11 - i, "   ");
+  					bp.getBoard().set(12 - i, "   ");
   				}
   			}
   		}

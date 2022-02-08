@@ -1,6 +1,7 @@
 package com.blackoutburst.fireblast.main;
 
 import com.blackoutburst.fireblast.commands.CommandEnd;
+import com.blackoutburst.fireblast.commands.CommandScan;
 import com.blackoutburst.fireblast.commands.CommandStart;
 import com.blackoutburst.fireblast.core.BlastPlayer;
 import com.blackoutburst.fireblast.core.Core;
@@ -14,7 +15,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.SmallFireball;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -23,6 +23,7 @@ import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +38,7 @@ public class Main extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         getServer().getPluginManager().registerEvents(this, this);
+        new File("./plugins/FireBlast/").mkdirs();
         spawn = new Location(Bukkit.getWorld("world"), 0.5f, 5.0f, 0.5f, 0, 0);
         Core.gameTimer();
     }
@@ -109,6 +111,7 @@ public class Main extends JavaPlugin implements Listener {
         switch (command.getName().toLowerCase()) {
             case "start": new CommandStart().execute(); break;
             case "end": new CommandEnd().execute(); break;
+            case "scan": new CommandScan().execute(sender, args); break;
             default: return (true);
         }
         return (true);
