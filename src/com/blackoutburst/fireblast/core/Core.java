@@ -4,6 +4,8 @@ import com.blackoutburst.fireblast.main.Main;
 import com.blackoutburst.fireblast.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class Core {
@@ -22,6 +24,8 @@ public class Core {
         Main.gameTime = 0;
         Main.gameRunning = true;
         for (BlastPlayer bp : Main.players) {
+            bp.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 100000, 254, false, false));
+            bp.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 100000, 254, false, false));
             resetPlayer(bp);
             Utils.giveItem(bp.getPlayer());
         }
@@ -32,6 +36,8 @@ public class Core {
         BlastPlayer winner = null;
 
         for (BlastPlayer bp : Main.players) {
+            bp.getPlayer().removePotionEffect(PotionEffectType.DAMAGE_RESISTANCE);
+            bp.getPlayer().removePotionEffect(PotionEffectType.REGENERATION);
             if (bp.isAlive()) winner = bp;
             resetPlayer(bp);
         }
