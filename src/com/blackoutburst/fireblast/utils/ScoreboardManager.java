@@ -7,11 +7,6 @@ import java.util.ArrayList;
 
 public class ScoreboardManager {
 
-	public static void clear(BlastPlayer p) {
-		for (int i = 15; i >= 0; i--)
-			p.getBoard().remove(i);
-	}
-	
 	public static void init(BlastPlayer bp) {
 		Board board = new Board(bp.getPlayer());
 		
