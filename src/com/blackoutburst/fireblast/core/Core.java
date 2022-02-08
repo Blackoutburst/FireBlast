@@ -43,6 +43,8 @@ public class Core {
         }
 
         if (winner != null) {
+            Utils.reloadWorld(winner.getPlayer().getWorld());
+
             final int minutes = Main.gameTime / 60;
             final int seconds = Main.gameTime % 60;
             final String time = String.format("%d:%02d", minutes, seconds);
