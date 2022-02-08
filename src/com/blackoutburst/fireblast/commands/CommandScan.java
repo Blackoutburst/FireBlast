@@ -35,10 +35,10 @@ public class CommandScan {
         }
     }
 
-    public boolean execute(CommandSender sender, String[] args) {
+    public void execute(CommandSender sender, String[] args) {
         if (args.length < 6) {
             sender.sendMessage("§cInvalid usage try §e/scan x1 y1 z1 x2 y2 z2");
-            return false;
+            return;
         }
 
         int x1 = Integer.min(Integer.parseInt(args[0]), Integer.parseInt(args[3]));
@@ -66,8 +66,6 @@ public class CommandScan {
         }
         saveLocation(world.getName());
         sender.sendMessage("§bScan complete, §a"+ world.getName()+" §bsaved");
-
-        return (true);
     }
 
 }
