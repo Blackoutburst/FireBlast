@@ -1,7 +1,7 @@
 package com.blackoutburst.fireblast.main;
 
 import com.blackoutburst.fireblast.commands.CommandEnd;
-import com.blackoutburst.fireblast.commands.CommandReload;
+import com.blackoutburst.fireblast.commands.CommandReloadWorld;
 import com.blackoutburst.fireblast.commands.CommandScan;
 import com.blackoutburst.fireblast.commands.CommandStart;
 import com.blackoutburst.fireblast.core.BlastPlayer;
@@ -113,7 +113,7 @@ public class Main extends JavaPlugin implements Listener {
             case "start": new CommandStart().execute(); break;
             case "end": new CommandEnd().execute(); break;
             case "scan": new CommandScan().execute(sender, args); break;
-            case "reload": new CommandReload().execute(sender, args); break;
+            case "reloadworld": new CommandReloadWorld().execute(sender, args); break;
             default: return (true);
         }
         return (true);

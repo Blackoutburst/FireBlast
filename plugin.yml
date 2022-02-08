@@ -14,6 +14,6 @@ commands:
   scan:
     description: scan the map
     usage: /scan <x1> <y1> <z1> <x2> <y2> <z2>
-  reload:
+  reloadWorld:
     description: reload the map
     usage: /reload <world>
