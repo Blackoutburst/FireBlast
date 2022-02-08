@@ -25,7 +25,7 @@ public class CommandScan {
             file.set("loc."+i+".x", blocks.get(i).getLocation().getBlockX());
             file.set("loc."+i+".y", blocks.get(i).getLocation().getBlockY());
             file.set("loc."+i+".z", blocks.get(i).getLocation().getBlockZ());
-            file.set("loc."+i+".mat", blocks.get(i).getMaterial());
+            file.set("loc."+i+".mat", blocks.get(i).getMaterial().toString());
             file.set("loc."+i+".data", blocks.get(i).getData());
         }
         try {
