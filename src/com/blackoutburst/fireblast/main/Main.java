@@ -30,7 +30,7 @@ import java.util.List;
 public class Main extends JavaPlugin implements Listener {
 
     public static final int SHOOT_COOLDOWN = 10;
-    public static final int DASH_COOLDOWN = 40;
+    public static final int DASH_COOLDOWN = 100;
 
     public static List<BlastPlayer> players = new ArrayList<>();
     public static List<BlastProjectile> projectiles = new ArrayList<>();
