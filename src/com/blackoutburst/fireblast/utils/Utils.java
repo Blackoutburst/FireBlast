@@ -32,18 +32,17 @@ public class Utils {
         YamlConfiguration file = YamlConfiguration.loadConfiguration(new File("plugins/FireBlast/"+w.getName()+".yml"));
         Set<String> blc = file.getConfigurationSection("loc").getKeys(false);
         for (String i : blc) {
-            World world = Bukkit.getWorld(file.getString("loc."+i+".world"));
-            double x = file.getDouble("loc."+i+".x") + 0.5f;
-            double y = file.getDouble("loc."+i+".y") + 0.5f;
-            double z = file.getDouble("loc."+i+".z") + 0.5f;
-            Material mat = Material.getMaterial(file.getString("loc."+i+".mat"));
+            int x = file.getInt("loc."+i+".x");
+            int y = file.getInt("loc."+i+".y");
+            int z = file.getInt("loc."+i+".z");
+            String mat = file.getString("loc."+i+".mat");
             byte data = (byte) file.getInt("loc."+i+".data");
-            blocks.add(new BlockMap(new Location(world, x, y, z), mat, data));
+            blocks.add(new BlockMap(x, y, z, mat, data));
         }
 
         for (BlockMap b : blocks) {
-            Block block = w.getBlockAt(new Location(w, b.getLocation().getBlockX(), b.getLocation().getBlockY(), b.getLocation().getBlockZ()));
-            block.setType(b.getMaterial());
+            Block block = w.getBlockAt(new Location(w, b.getX(), b.getY(), b.getZ()));
+            block.setType(Material.getMaterial(b.getMaterial()));
             block.setData(b.getData());
         }
     }

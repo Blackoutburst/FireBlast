@@ -4,21 +4,33 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 
 public class BlockMap {
-    protected Location location;
-    protected Material material;
+    protected int x;
+    protected int y;
+    protected int z;
+    protected String material;
     protected byte data;
 
-    public BlockMap(Location location, Material material, byte data) {
-        this.location = location;
+    public BlockMap(int x, int y, int z, String material, byte data) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
         this.material = material;
         this.data = data;
     }
 
-    public Location getLocation() {
-        return location;
+    public int getX() {
+        return x;
     }
 
-    public Material getMaterial() {
+    public int getY() {
+        return y;
+    }
+
+    public int getZ() {
+        return z;
+    }
+
+    public String getMaterial() {
         return material;
     }
 
