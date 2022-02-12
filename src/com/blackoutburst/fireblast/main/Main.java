@@ -76,6 +76,10 @@ public class Main extends JavaPlugin implements Listener {
             fireball.setIsIncendiary(false);
             fireball.setYield(2);
         }
+        if (gameRunning && event.getPlayer().getItemInHand().getType().equals(Material.BLAZE_ROD) && event.getAction() == Action.RIGHT_CLICK_AIR ||
+                gameRunning && event.getPlayer().getItemInHand().getType().equals(Material.BLAZE_ROD) && event.getAction() == Action.RIGHT_CLICK_BLOCK) {
+            event.getPlayer().setVelocity(event.getPlayer().getLocation().getDirection().multiply(2));
+        }
     }
 
     @EventHandler
@@ -85,15 +89,12 @@ public class Main extends JavaPlugin implements Listener {
 
     @EventHandler
     public void onEntityDamage(EntityDamageEvent event) {
-        if (event.getEntity() instanceof Player)
-            ((Player)event.getEntity()).setHealth(20);
-        if (event.getCause() != EntityDamageEvent.DamageCause.ENTITY_EXPLOSION)
-            event.setCancelled(true);
+        event.setCancelled(gameRunning);
     }
 
     @EventHandler
     public void onFoodLevelChange(FoodLevelChangeEvent event) {
-        event.setCancelled(true);
+        event.setCancelled(gameRunning);
     }
 
     @EventHandler

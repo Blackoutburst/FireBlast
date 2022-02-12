@@ -26,6 +26,8 @@ public class Core {
         for (BlastPlayer bp : Main.players) {
             bp.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 100000, 254, false, false));
             bp.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 100000, 254, false, false));
+            bp.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100000, 2, false, false));
+            bp.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 100000, 1, false, false));
             resetPlayer(bp);
             Utils.giveItem(bp.getPlayer());
         }
@@ -38,6 +40,8 @@ public class Core {
         for (BlastPlayer bp : Main.players) {
             bp.getPlayer().removePotionEffect(PotionEffectType.DAMAGE_RESISTANCE);
             bp.getPlayer().removePotionEffect(PotionEffectType.REGENERATION);
+            bp.getPlayer().removePotionEffect(PotionEffectType.SPEED);
+            bp.getPlayer().removePotionEffect(PotionEffectType.JUMP);
             if (bp.isAlive()) winner = bp;
             resetPlayer(bp);
         }
