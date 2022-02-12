@@ -24,7 +24,7 @@ public class BlastProjectile {
         this.location = location;
         this.direction = direction;
         this.alive = true;
-        this.tick = 100;
+        this.tick = 50;
     }
 
     private boolean hitBlock() {

@@ -9,10 +9,7 @@ import com.blackoutburst.fireblast.core.BlastProjectile;
 import com.blackoutburst.fireblast.core.Core;
 import com.blackoutburst.fireblast.utils.ScoreboardManager;
 import com.blackoutburst.fireblast.utils.Utils;
-import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.event.EventHandler;
@@ -81,13 +78,14 @@ public class Main extends JavaPlugin implements Listener {
             bp.setShootCooldown(SHOOT_COOLDOWN);
             Location loc = event.getPlayer().getLocation().clone();
             loc.setY(loc.getY() + event.getPlayer().getEyeHeight());
-
             projectiles.add(new BlastProjectile(loc, event.getPlayer().getLocation().getDirection().clone()));
+            event.getPlayer().getLocation().getWorld().playSound(event.getPlayer().getLocation(), Sound.IRONGOLEM_HIT, 2, 2);
         }
         if (gameRunning && bp.getDashCooldown() <= 0 && event.getPlayer().getItemInHand().getType().equals(Material.BLAZE_ROD) && event.getAction() == Action.LEFT_CLICK_AIR ||
                 gameRunning && bp.getDashCooldown() <= 0 && event.getPlayer().getItemInHand().getType().equals(Material.BLAZE_ROD) && event.getAction() == Action.LEFT_CLICK_BLOCK) {
             bp.setDashCooldown(DASH_COOLDOWN);
             event.getPlayer().setVelocity(event.getPlayer().getLocation().getDirection().multiply(2));
+            event.getPlayer().getLocation().getWorld().playSound(event.getPlayer().getLocation(), Sound.BAT_TAKEOFF, 2, 0.5f);
         }
     }
 
