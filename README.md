@@ -3,7 +3,7 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/377955dafdca4f6a9f4dcb9825160eaa)](https://www.codacy.com/gh/Blackoutburst/FireBlast/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Blackoutburst/FireBlast&amp;utm_campaign=Badge_Grade)
 
 # FireBlast
-A small Minecraft minigames were you blow up a map using fireball, the goal is the be the last player alive and not fall in the void
+A small Minecraft minigames were you blow up a map using an explosive wand, the goal is the be the last player alive and not fall in the void
 
 ## Important
 The spawnpoint is currently hard coded at (0, 5, 0)
