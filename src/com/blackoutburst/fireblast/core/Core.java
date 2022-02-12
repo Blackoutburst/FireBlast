@@ -34,6 +34,7 @@ public class Core {
     }
 
     public static void endGame() {
+        Main.projectiles.clear();
         Main.gameRunning = false;
         BlastPlayer winner = null;
 
@@ -72,6 +73,27 @@ public class Core {
         if (aliveCount <= 1) {
             endGame();
         }
+    }
+
+    public static void updater() {
+        new BukkitRunnable(){
+            @Override
+            public void run(){
+                if (Main.gameRunning) {
+                    int j = Main.projectiles.size();
+
+                    for (int i = 0; i < j; i++) {
+                        BlastProjectile bp = Main.projectiles.get(i);
+                        bp.update();
+                        if (!bp.alive) {
+                            Main.projectiles.remove(bp);
+                            j--;
+                            i--;
+                        }
+                    }
+                }
+            }
+        }.runTaskTimer(Main.getPlugin(Main.class), 0L, 1L);
     }
 
     public static void gameTimer() {
