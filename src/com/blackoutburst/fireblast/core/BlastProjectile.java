@@ -42,7 +42,7 @@ public class BlastProjectile {
             for (int y = location.getBlockY() - 1; y <= location.getBlockY() + 1; y++)
                 for (int z = location.getBlockZ() - 1; z <= location.getBlockZ() + 1; z++)
                     location.getWorld().getBlockAt(new Location(location.getWorld(), x, y, z)).setType(Material.AIR);
-        location.getWorld().playSound(location, Sound.EXPLODE, 2, 1);
+        location.getWorld().playSound(location, Sound.EXPLODE, 3, 1);
         for (final BlastPlayer bp : Main.players) {
             final PlayerConnection connection = ((CraftPlayer) bp.player).getHandle().playerConnection;
             connection.sendPacket(new PacketPlayOutWorldParticles(EnumParticle.EXPLOSION_LARGE, true, xloc, yloc, zloc, 0, 0, 0, 0, 1));
@@ -56,8 +56,10 @@ public class BlastProjectile {
 
         for (final BlastPlayer bp : Main.players) {
             final PlayerConnection connection = ((CraftPlayer) bp.player).getHandle().playerConnection;
-            connection.sendPacket(new PacketPlayOutWorldParticles(EnumParticle.FLAME, true, xloc, yloc, zloc, 0, 0, 0, 0, 1));
-            Utils.createCircle(connection, location, circle);
+            connection.sendPacket(new PacketPlayOutWorldParticles(EnumParticle.FIREWORKS_SPARK, true, xloc, yloc, zloc, 0, 0, 0, 0, 1));
+            if (circle > 3) {
+                Utils.createCircle(connection, location);
+            }
         }
         if (circle > 3) {
             circle = 0;
