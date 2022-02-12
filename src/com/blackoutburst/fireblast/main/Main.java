@@ -73,16 +73,16 @@ public class Main extends JavaPlugin implements Listener {
 
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
-        if (gameRunning && event.getPlayer().getItemInHand().getType().equals(Material.BLAZE_ROD) && event.getAction() == Action.LEFT_CLICK_AIR ||
-                gameRunning && event.getPlayer().getItemInHand().getType().equals(Material.BLAZE_ROD) && event.getAction() == Action.LEFT_CLICK_BLOCK) {
+        if (gameRunning && event.getPlayer().getItemInHand().getType().equals(Material.BLAZE_ROD) && event.getAction() == Action.RIGHT_CLICK_AIR ||
+                gameRunning && event.getPlayer().getItemInHand().getType().equals(Material.BLAZE_ROD) && event.getAction() == Action.RIGHT_CLICK_BLOCK) {
 
             Location loc = event.getPlayer().getLocation().clone();
             loc.setY(loc.getY() + event.getPlayer().getEyeHeight());
 
             projectiles.add(new BlastProjectile(loc, event.getPlayer().getLocation().getDirection().clone()));
         }
-        if (gameRunning && event.getPlayer().getItemInHand().getType().equals(Material.BLAZE_ROD) && event.getAction() == Action.RIGHT_CLICK_AIR ||
-                gameRunning && event.getPlayer().getItemInHand().getType().equals(Material.BLAZE_ROD) && event.getAction() == Action.RIGHT_CLICK_BLOCK) {
+        if (gameRunning && event.getPlayer().getItemInHand().getType().equals(Material.BLAZE_ROD) && event.getAction() == Action.LEFT_CLICK_AIR ||
+                gameRunning && event.getPlayer().getItemInHand().getType().equals(Material.BLAZE_ROD) && event.getAction() == Action.LEFT_CLICK_BLOCK) {
             event.getPlayer().setVelocity(event.getPlayer().getLocation().getDirection().multiply(2));
         }
     }

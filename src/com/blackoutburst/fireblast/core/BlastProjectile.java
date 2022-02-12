@@ -32,13 +32,21 @@ public class BlastProjectile {
     }
 
     private void explode() {
+        final float xloc = (float) this.location.getX();
+        final float yloc = (float) this.location.getY();
+        final float zloc = (float) this.location.getZ();
+
         alive = false;
 
         for (int x = location.getBlockX() - 1; x <= location.getBlockX() + 1; x++)
             for (int y = location.getBlockY() - 1; y <= location.getBlockY() + 1; y++)
                 for (int z = location.getBlockZ() - 1; z <= location.getBlockZ() + 1; z++)
                     location.getWorld().getBlockAt(new Location(location.getWorld(), x, y, z)).setType(Material.AIR);
-        location.getWorld().playSound(location, Sound.EXPLODE, 1, 1);
+        location.getWorld().playSound(location, Sound.EXPLODE, 2, 1);
+        for (final BlastPlayer bp : Main.players) {
+            final PlayerConnection connection = ((CraftPlayer) bp.player).getHandle().playerConnection;
+            connection.sendPacket(new PacketPlayOutWorldParticles(EnumParticle.EXPLOSION_LARGE, true, xloc, yloc, zloc, 0, 0, 0, 0, 1));
+        }
     }
 
     private void trail() {
@@ -49,9 +57,7 @@ public class BlastProjectile {
         for (final BlastPlayer bp : Main.players) {
             final PlayerConnection connection = ((CraftPlayer) bp.player).getHandle().playerConnection;
             connection.sendPacket(new PacketPlayOutWorldParticles(EnumParticle.FLAME, true, xloc, yloc, zloc, 0, 0, 0, 0, 1));
-            if (circle > 3) {
-                Utils.createCircle(connection, location);
-            }
+            Utils.createCircle(connection, location, circle);
         }
         if (circle > 3) {
             circle = 0;

@@ -78,11 +78,11 @@ public class Utils {
         return StringUtils.repeat(" ", spaces) + text;
     }
 
-    public static void createCircle(PlayerConnection connection, Location location) {
+    public static void createCircle(PlayerConnection connection, Location location, float radius) {
         for (int i = 9; i > 0; i--) {
             final double angle = 2 * Math.PI * i / 9;
-            final double x = Math.cos(angle) * 0.3f;
-            final double y = Math.sin(angle) * 0.3f;
+            final double x = Math.cos(angle) * radius / 10f;
+            final double y = Math.sin(angle) * radius / 10f;
 
             Vector v = rotateAroundAxisX(new Vector(x, y, 0), location.getPitch());
             v = rotateAroundAxisY(v, location.getYaw());
