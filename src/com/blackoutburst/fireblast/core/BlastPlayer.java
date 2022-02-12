@@ -9,10 +9,14 @@ public class BlastPlayer {
     protected Player player;
     protected Board board;
     protected boolean alive;
+    protected int shootCooldown;
+    protected int dashCooldown;
 
     public BlastPlayer(Player player) {
         this.player = player;
         this.alive = true;
+        shootCooldown = Main.SHOOT_COOLDOWN;
+        dashCooldown = Main.DASH_COOLDOWN;
     }
 
     public Player getPlayer() {
@@ -41,5 +45,21 @@ public class BlastPlayer {
 
     public void setAlive(boolean alive) {
         this.alive = alive;
+    }
+
+    public int getShootCooldown() {
+        return shootCooldown;
+    }
+
+    public int getDashCooldown() {
+        return dashCooldown;
+    }
+
+    public void setShootCooldown(int shootCooldown) {
+        this.shootCooldown = shootCooldown;
+    }
+
+    public void setDashCooldown(int dashCooldown) {
+        this.dashCooldown = dashCooldown;
     }
 }

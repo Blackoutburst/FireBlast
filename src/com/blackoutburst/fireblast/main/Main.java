@@ -19,18 +19,18 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
-import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.util.Vector;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Main extends JavaPlugin implements Listener {
+
+    public static final int SHOOT_COOLDOWN = 10;
+    public static final int DASH_COOLDOWN = 40;
 
     public static List<BlastPlayer> players = new ArrayList<>();
     public static List<BlastProjectile> projectiles = new ArrayList<>();
@@ -73,16 +73,20 @@ public class Main extends JavaPlugin implements Listener {
 
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
-        if (gameRunning && event.getPlayer().getItemInHand().getType().equals(Material.BLAZE_ROD) && event.getAction() == Action.RIGHT_CLICK_AIR ||
-                gameRunning && event.getPlayer().getItemInHand().getType().equals(Material.BLAZE_ROD) && event.getAction() == Action.RIGHT_CLICK_BLOCK) {
+        BlastPlayer bp = BlastPlayer.getFromPlayer(event.getPlayer());
+        if (bp == null) return;
 
+        if (gameRunning && bp.getShootCooldown() <= 0 && event.getPlayer().getItemInHand().getType().equals(Material.BLAZE_ROD) && event.getAction() == Action.RIGHT_CLICK_AIR ||
+                gameRunning && bp.getShootCooldown() <= 0 && event.getPlayer().getItemInHand().getType().equals(Material.BLAZE_ROD) && event.getAction() == Action.RIGHT_CLICK_BLOCK) {
+            bp.setShootCooldown(SHOOT_COOLDOWN);
             Location loc = event.getPlayer().getLocation().clone();
             loc.setY(loc.getY() + event.getPlayer().getEyeHeight());
 
             projectiles.add(new BlastProjectile(loc, event.getPlayer().getLocation().getDirection().clone()));
         }
-        if (gameRunning && event.getPlayer().getItemInHand().getType().equals(Material.BLAZE_ROD) && event.getAction() == Action.LEFT_CLICK_AIR ||
-                gameRunning && event.getPlayer().getItemInHand().getType().equals(Material.BLAZE_ROD) && event.getAction() == Action.LEFT_CLICK_BLOCK) {
+        if (gameRunning && bp.getDashCooldown() <= 0 && event.getPlayer().getItemInHand().getType().equals(Material.BLAZE_ROD) && event.getAction() == Action.LEFT_CLICK_AIR ||
+                gameRunning && bp.getDashCooldown() <= 0 && event.getPlayer().getItemInHand().getType().equals(Material.BLAZE_ROD) && event.getAction() == Action.LEFT_CLICK_BLOCK) {
+            bp.setDashCooldown(DASH_COOLDOWN);
             event.getPlayer().setVelocity(event.getPlayer().getLocation().getDirection().multiply(2));
         }
     }

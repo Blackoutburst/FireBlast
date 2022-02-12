@@ -80,6 +80,13 @@ public class Core {
             @Override
             public void run(){
                 if (Main.gameRunning) {
+                    for (BlastPlayer bp : Main.players) {
+                        if (bp.dashCooldown > 0)
+                            bp.dashCooldown--;
+                        if (bp.shootCooldown > 0)
+                            bp.shootCooldown--;
+                    }
+
                     int j = Main.projectiles.size();
 
                     for (int i = 0; i < j; i++) {
