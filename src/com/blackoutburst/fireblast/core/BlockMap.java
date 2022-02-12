@@ -1,8 +1,5 @@
 package com.blackoutburst.fireblast.core;
 
-import org.bukkit.Location;
-import org.bukkit.Material;
-
 public class BlockMap {
     protected int x;
     protected int y;
