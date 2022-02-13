@@ -3,9 +3,7 @@ package com.blackoutburst.fireblast.core;
 import com.blackoutburst.fireblast.main.Main;
 import com.blackoutburst.fireblast.utils.Utils;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.Sound;
-import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 public class BlastWand {

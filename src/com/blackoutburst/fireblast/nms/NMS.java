@@ -3,8 +3,6 @@ package com.blackoutburst.fireblast.nms;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import java.lang.reflect.Field;
-
 public class NMS {
 
     public static Class<?> getClass(String name) {
