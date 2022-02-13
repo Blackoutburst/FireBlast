@@ -6,6 +6,7 @@ import com.blackoutburst.fireblast.commands.CommandScan;
 import com.blackoutburst.fireblast.commands.CommandStart;
 import com.blackoutburst.fireblast.core.BlastPlayer;
 import com.blackoutburst.fireblast.core.BlastProjectile;
+import com.blackoutburst.fireblast.core.BlastWand;
 import com.blackoutburst.fireblast.core.Core;
 import com.blackoutburst.fireblast.utils.ScoreboardManager;
 import com.blackoutburst.fireblast.utils.Utils;
@@ -73,24 +74,18 @@ public class Main extends JavaPlugin implements Listener {
         BlastPlayer bp = BlastPlayer.getFromPlayer(event.getPlayer());
         if (bp == null) return;
 
-        if (gameRunning && bp.getShootCooldown() <= 0 && (event.getPlayer().getItemInHand().getType().equals(Material.BLAZE_ROD) ||
-                event.getPlayer().getItemInHand().getType().equals(Material.STICK)) && event.getAction() == Action.RIGHT_CLICK_AIR ||
-                gameRunning && bp.getShootCooldown() <= 0 && (event.getPlayer().getItemInHand().getType().equals(Material.BLAZE_ROD) ||
-                        event.getPlayer().getItemInHand().getType().equals(Material.STICK)) && event.getAction() == Action.RIGHT_CLICK_BLOCK) {
-            bp.setShootCooldown(SHOOT_COOLDOWN);
-            Location loc = event.getPlayer().getLocation().clone();
-            loc.setY(loc.getY() + event.getPlayer().getEyeHeight());
-            projectiles.add(new BlastProjectile(loc, event.getPlayer().getLocation().getDirection().clone()));
-            event.getPlayer().getLocation().getWorld().playSound(event.getPlayer().getLocation(), Sound.IRONGOLEM_HIT, 2, 2);
-            Utils.giveItem(bp.getPlayer(), true);
+        final Material item = event.getPlayer().getItemInHand().getType();
+        final Action action = event.getAction();
+        final boolean holdWand = item.equals(Material.BLAZE_ROD) || item.equals(Material.STICK);
+        final boolean leftClick = action == Action.LEFT_CLICK_BLOCK || action == Action.LEFT_CLICK_AIR;
+        final boolean rightClick = action == Action.RIGHT_CLICK_BLOCK || action == Action.RIGHT_CLICK_AIR;
+
+        if (Main.gameRunning && holdWand && bp.getDashCooldown() <= 0 && leftClick) {
+            BlastWand.leftClick(event, bp);
         }
-        if (gameRunning && bp.getDashCooldown() <= 0 && (event.getPlayer().getItemInHand().getType().equals(Material.BLAZE_ROD) ||
-                event.getPlayer().getItemInHand().getType().equals(Material.STICK)) && event.getAction() == Action.LEFT_CLICK_AIR ||
-                gameRunning && bp.getDashCooldown() <= 0 && (event.getPlayer().getItemInHand().getType().equals(Material.BLAZE_ROD) ||
-                        event.getPlayer().getItemInHand().getType().equals(Material.STICK)) && event.getAction() == Action.LEFT_CLICK_BLOCK) {
-            bp.setDashCooldown(DASH_COOLDOWN);
-            event.getPlayer().setVelocity(event.getPlayer().getLocation().getDirection().multiply(2));
-            event.getPlayer().getLocation().getWorld().playSound(event.getPlayer().getLocation(), Sound.BAT_TAKEOFF, 2, 0.5f);
+
+        if (Main.gameRunning && holdWand && bp.getShootCooldown() <= 0 && rightClick) {
+            BlastWand.rightClick(event, bp);
         }
     }
 
