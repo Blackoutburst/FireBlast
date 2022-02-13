@@ -1,6 +1,7 @@
 package com.blackoutburst.fireblast.core;
 
 import com.blackoutburst.fireblast.main.Main;
+import com.blackoutburst.fireblast.nms.NMSExperience;
 import com.blackoutburst.fireblast.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -83,6 +84,7 @@ public class Core {
                             bp.shootCooldown--;
                         if (bp.shootCooldown == 1)
                             Utils.giveItem(bp.getPlayer(), false);
+                        NMSExperience.setXp(bp.getPlayer(), Utils.map(Main.DASH_COOLDOWN-bp.dashCooldown, 0, Main.DASH_COOLDOWN, 0, 1));
                     }
 
                     int j = Main.projectiles.size();

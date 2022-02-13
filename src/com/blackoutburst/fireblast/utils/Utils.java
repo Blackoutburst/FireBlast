@@ -69,6 +69,10 @@ public class Utils {
         p.getInventory().setItem(0, menu);
     }
 
+    public static float map(float value, float min1, float max1, float min2, float max2) {
+        return min2 + (value - min1) * (max2 - min2) / (max1 - min1);
+    }
+
     public static String centerText(String text) {
         int maxWidth = 60;
         int spaces = (int) Math.round((maxWidth - 1.4 * ChatColor.stripColor(text).length()) / 2);
