@@ -80,6 +80,7 @@ public class Main extends JavaPlugin implements Listener {
             loc.setY(loc.getY() + event.getPlayer().getEyeHeight());
             projectiles.add(new BlastProjectile(loc, event.getPlayer().getLocation().getDirection().clone()));
             event.getPlayer().getLocation().getWorld().playSound(event.getPlayer().getLocation(), Sound.IRONGOLEM_HIT, 2, 2);
+            Utils.giveItem(bp.getPlayer(), true);
         }
         if (gameRunning && bp.getDashCooldown() <= 0 && event.getPlayer().getItemInHand().getType().equals(Material.BLAZE_ROD) && event.getAction() == Action.LEFT_CLICK_AIR ||
                 gameRunning && bp.getDashCooldown() <= 0 && event.getPlayer().getItemInHand().getType().equals(Material.BLAZE_ROD) && event.getAction() == Action.LEFT_CLICK_BLOCK) {

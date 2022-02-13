@@ -27,7 +27,7 @@ public class Core {
             bp.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100000, 2, false, false));
             bp.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 100000, 1, false, false));
             resetPlayer(bp);
-            Utils.giveItem(bp.getPlayer());
+            Utils.giveItem(bp.getPlayer(), false);
         }
     }
 
@@ -81,6 +81,8 @@ public class Core {
                             bp.dashCooldown--;
                         if (bp.shootCooldown > 0)
                             bp.shootCooldown--;
+                        if (bp.shootCooldown == 1)
+                            Utils.giveItem(bp.getPlayer(), false);
                     }
 
                     int j = Main.projectiles.size();

@@ -56,8 +56,8 @@ public class Utils {
         return aliveCount;
     }
 
-    public static void giveItem(Player p) {
-        ItemStack menu = new ItemStack(Material.BLAZE_ROD, 1);
+    public static void giveItem(Player p, boolean onCooldown) {
+        ItemStack menu = new ItemStack(onCooldown ? Material.STICK : Material.BLAZE_ROD, 1);
         ItemMeta menuMeta = menu.getItemMeta();
 
         p.getInventory().clear();
