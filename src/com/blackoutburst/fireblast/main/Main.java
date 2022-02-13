@@ -73,8 +73,10 @@ public class Main extends JavaPlugin implements Listener {
         BlastPlayer bp = BlastPlayer.getFromPlayer(event.getPlayer());
         if (bp == null) return;
 
-        if (gameRunning && bp.getShootCooldown() <= 0 && event.getPlayer().getItemInHand().getType().equals(Material.BLAZE_ROD) && event.getAction() == Action.RIGHT_CLICK_AIR ||
-                gameRunning && bp.getShootCooldown() <= 0 && event.getPlayer().getItemInHand().getType().equals(Material.BLAZE_ROD) && event.getAction() == Action.RIGHT_CLICK_BLOCK) {
+        if (gameRunning && bp.getShootCooldown() <= 0 && (event.getPlayer().getItemInHand().getType().equals(Material.BLAZE_ROD) ||
+                event.getPlayer().getItemInHand().getType().equals(Material.STICK)) && event.getAction() == Action.RIGHT_CLICK_AIR ||
+                gameRunning && bp.getShootCooldown() <= 0 && (event.getPlayer().getItemInHand().getType().equals(Material.BLAZE_ROD) ||
+                        event.getPlayer().getItemInHand().getType().equals(Material.STICK)) && event.getAction() == Action.RIGHT_CLICK_BLOCK) {
             bp.setShootCooldown(SHOOT_COOLDOWN);
             Location loc = event.getPlayer().getLocation().clone();
             loc.setY(loc.getY() + event.getPlayer().getEyeHeight());
@@ -82,8 +84,10 @@ public class Main extends JavaPlugin implements Listener {
             event.getPlayer().getLocation().getWorld().playSound(event.getPlayer().getLocation(), Sound.IRONGOLEM_HIT, 2, 2);
             Utils.giveItem(bp.getPlayer(), true);
         }
-        if (gameRunning && bp.getDashCooldown() <= 0 && event.getPlayer().getItemInHand().getType().equals(Material.BLAZE_ROD) && event.getAction() == Action.LEFT_CLICK_AIR ||
-                gameRunning && bp.getDashCooldown() <= 0 && event.getPlayer().getItemInHand().getType().equals(Material.BLAZE_ROD) && event.getAction() == Action.LEFT_CLICK_BLOCK) {
+        if (gameRunning && bp.getDashCooldown() <= 0 && (event.getPlayer().getItemInHand().getType().equals(Material.BLAZE_ROD) ||
+                event.getPlayer().getItemInHand().getType().equals(Material.STICK)) && event.getAction() == Action.LEFT_CLICK_AIR ||
+                gameRunning && bp.getDashCooldown() <= 0 && (event.getPlayer().getItemInHand().getType().equals(Material.BLAZE_ROD) ||
+                        event.getPlayer().getItemInHand().getType().equals(Material.STICK)) && event.getAction() == Action.LEFT_CLICK_BLOCK) {
             bp.setDashCooldown(DASH_COOLDOWN);
             event.getPlayer().setVelocity(event.getPlayer().getLocation().getDirection().multiply(2));
             event.getPlayer().getLocation().getWorld().playSound(event.getPlayer().getLocation(), Sound.BAT_TAKEOFF, 2, 0.5f);
