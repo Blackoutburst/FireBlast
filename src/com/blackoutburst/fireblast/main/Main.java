@@ -4,10 +4,7 @@ import com.blackoutburst.fireblast.commands.CommandEnd;
 import com.blackoutburst.fireblast.commands.CommandReloadWorld;
 import com.blackoutburst.fireblast.commands.CommandScan;
 import com.blackoutburst.fireblast.commands.CommandStart;
-import com.blackoutburst.fireblast.core.BlastPlayer;
-import com.blackoutburst.fireblast.core.BlastProjectile;
-import com.blackoutburst.fireblast.core.BlastWand;
-import com.blackoutburst.fireblast.core.Core;
+import com.blackoutburst.fireblast.core.*;
 import com.blackoutburst.fireblast.utils.ScoreboardManager;
 import com.blackoutburst.fireblast.utils.Utils;
 import org.bukkit.*;
@@ -16,6 +13,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.player.*;
@@ -32,6 +30,7 @@ public class Main extends JavaPlugin implements Listener {
 
     public static List<BlastPlayer> players = new ArrayList<>();
     public static List<BlastProjectile> projectiles = new ArrayList<>();
+    public static List<Location> respawns = new ArrayList<>();
     public static boolean gameRunning = false;
     public static int gameTime;
 
@@ -70,7 +69,14 @@ public class Main extends JavaPlugin implements Listener {
     }
 
     @EventHandler
+    public void onBlockBreak(BlockBreakEvent event) {
+        SpawnWand.leftClick(event);
+    }
+
+    @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
+        SpawnWand.rightClick(event);
+
         BlastPlayer bp = BlastPlayer.getFromPlayer(event.getPlayer());
         if (bp == null) return;
 
