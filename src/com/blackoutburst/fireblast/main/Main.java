@@ -35,6 +35,7 @@ public class Main extends JavaPlugin implements Listener {
     public void onEnable() {
         getServer().getPluginManager().registerEvents(this, this);
         new File("./plugins/FireBlast/").mkdirs();
+        Utils.spawnParticlesScheduler();
         Core.gameTimer();
         Core.updater();
     }

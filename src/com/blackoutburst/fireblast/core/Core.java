@@ -27,6 +27,7 @@ public class Core {
     public static void startGame() {
         Main.gameTime = 0;
         Main.gameRunning = true;
+        Utils.loadRespawn();
         for (BlastPlayer bp : Main.players) {
             bp.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100000, 2, false, false));
             bp.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 100000, 1, false, false));
