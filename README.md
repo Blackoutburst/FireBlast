@@ -10,10 +10,12 @@ Shoot explosive beam with right click and jump/dash in the direction you are fac
 ![2022-02-12_22 19 47](https://user-images.githubusercontent.com/30992311/153728809-a8f1c4a2-64ee-4b45-abcb-865a8b64da90.png)
 
 ## Important
-The spawnpoint is currently hard coded at (0, 5, 0)
+Before starting a game a world require:
+- A complete world scan for reloading the map after the game
+- At least 1 spawnpoint created using the spawnwand
 
 ## Commands
-`/start` Start the game\
+`/start <worldName>` Start the game\
 `/end` End the game\
 `/scan <x1> <y1> <z1> <x2> <y2> <z2>` Scan and save the map\
 `/reloadWorld <world>` Reload the map (scan must be done first)\
