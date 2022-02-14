@@ -5,9 +5,12 @@ import com.blackoutburst.fireblast.nms.NMSExperience;
 import com.blackoutburst.fireblast.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import java.util.Random;
 
 public class Core {
 
@@ -17,7 +20,7 @@ public class Core {
         p.getPlayer().setFoodLevel(20);
         p.getPlayer().setGameMode(GameMode.SURVIVAL);
         p.getPlayer().getInventory().clear();
-        p.getPlayer().teleport(Main.spawn);
+        Core.teleportToSpawnpoint(p.getPlayer());
         p.setAlive(true);
     }
 
@@ -101,6 +104,12 @@ public class Core {
                 }
             }
         }.runTaskTimer(Main.getPlugin(Main.class), 0L, 1L);
+    }
+
+    public static void teleportToSpawnpoint(Player p) {
+        if (Main.respawns.size() > 0) {
+            p.teleport(Main.respawns.get(new Random().nextInt(Main.respawns.size())));
+        }
     }
 
     public static void gameTimer() {

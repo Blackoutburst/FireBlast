@@ -31,13 +31,10 @@ public class Main extends JavaPlugin implements Listener {
     public static boolean gameRunning = false;
     public static int gameTime;
 
-    public static Location spawn;
-
     @Override
     public void onEnable() {
         getServer().getPluginManager().registerEvents(this, this);
         new File("./plugins/FireBlast/").mkdirs();
-        spawn = new Location(Bukkit.getWorld("world"), 0.5f, 5.0f, 0.5f, 0, 0);
         Core.gameTimer();
         Core.updater();
     }
@@ -61,7 +58,7 @@ public class Main extends JavaPlugin implements Listener {
                 Bukkit.broadcastMessage(event.getPlayer().getDisplayName()+" §efell into the void! §a"+Utils.getNumberOfPlayerAlive()+" player remaining!");
                 Core.checkEndGame();
             }
-            event.getPlayer().teleport(spawn);
+            Core.teleportToSpawnpoint(event.getPlayer());
         }
     }
 
