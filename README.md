@@ -18,3 +18,5 @@ The spawnpoint is currently hard coded at (0, 5, 0)
 `/scan <x1> <y1> <z1> <x2> <y2> <z2>` Scan and save the map\
 `/reloadWorld <world>` Reload the map (scan must be done first)\
 `/spawnwand` Give you the magic tool used to create spawnpoints
+
+All commands require the permission `firebalst.admin`
