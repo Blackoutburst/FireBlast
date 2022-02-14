@@ -6,18 +6,26 @@ author: Blackoutburst
 description: Don't die lol
 commands:
   start:
+    permission: firebalst.admin
     description: Start the game
     usage: /start
   end:
+    permission: firebalst.admin
     description: End the game
     usage: /end
   scan:
+    permission: firebalst.admin
     description: scan the map
     usage: /scan <x1> <y1> <z1> <x2> <y2> <z2>
   reloadWorld:
+    permission: firebalst.admin
     description: reload the map
     usage: /reloadWorld <world>
   spawnWand:
-    permission: quake.debug
+    permission: firebalst.admin
     description: Give you the spawnwand
     usage: /spawnwand
+    
+  permissions:
+    firebalst.admin:
+      default: op
