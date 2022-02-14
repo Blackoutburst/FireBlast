@@ -8,7 +8,7 @@ commands:
   start:
     permission: firebalst.admin
     description: Start the game
-    usage: /start
+    usage: /start <worldName>
   end:
     permission: firebalst.admin
     description: End the game

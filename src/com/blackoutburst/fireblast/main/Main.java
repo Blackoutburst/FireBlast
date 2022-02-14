@@ -118,7 +118,7 @@ public class Main extends JavaPlugin implements Listener {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         switch (command.getName().toLowerCase()) {
-            case "start": new CommandStart().execute(); break;
+            case "start": new CommandStart().execute(sender, args); break;
             case "end": new CommandEnd().execute(); break;
             case "scan": new CommandScan().execute(sender, args); break;
             case "reloadworld": new CommandReloadWorld().execute(sender, args); break;

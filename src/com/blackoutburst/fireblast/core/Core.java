@@ -24,10 +24,10 @@ public class Core {
         p.setAlive(true);
     }
 
-    public static void startGame() {
+    public static void startGame(String worldName) {
         Main.gameTime = 0;
         Main.gameRunning = true;
-        Utils.loadRespawn();
+        Utils.loadRespawn(worldName);
         for (BlastPlayer bp : Main.players) {
             bp.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100000, 2, false, false));
             bp.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 100000, 1, false, false));
