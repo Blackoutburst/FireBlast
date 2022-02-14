@@ -1,9 +1,6 @@
 package com.blackoutburst.fireblast.main;
 
-import com.blackoutburst.fireblast.commands.CommandEnd;
-import com.blackoutburst.fireblast.commands.CommandReloadWorld;
-import com.blackoutburst.fireblast.commands.CommandScan;
-import com.blackoutburst.fireblast.commands.CommandStart;
+import com.blackoutburst.fireblast.commands.*;
 import com.blackoutburst.fireblast.core.*;
 import com.blackoutburst.fireblast.utils.ScoreboardManager;
 import com.blackoutburst.fireblast.utils.Utils;
@@ -127,6 +124,7 @@ public class Main extends JavaPlugin implements Listener {
             case "end": new CommandEnd().execute(); break;
             case "scan": new CommandScan().execute(sender, args); break;
             case "reloadworld": new CommandReloadWorld().execute(sender, args); break;
+            case "spawnwand": new CommandSpawnWand().execute(sender); break;
             default: return (true);
         }
         return (true);
