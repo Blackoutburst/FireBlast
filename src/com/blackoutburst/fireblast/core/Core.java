@@ -2,6 +2,7 @@ package com.blackoutburst.fireblast.core;
 
 import com.blackoutburst.fireblast.main.Main;
 import com.blackoutburst.fireblast.nms.NMSExperience;
+import com.blackoutburst.fireblast.nms.NMSTitle;
 import com.blackoutburst.fireblast.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -24,16 +25,45 @@ public class Core {
         p.setAlive(true);
     }
 
-    public static void startGame(String worldName) {
-        Main.gameTime = 0;
-        Main.gameRunning = true;
-        Utils.loadRespawn(worldName);
-        for (BlastPlayer bp : Main.players) {
-            bp.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100000, 2, false, false));
-            bp.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 100000, 1, false, false));
-            resetPlayer(bp);
-            Utils.giveItem(bp.getPlayer(), false);
+    private static void countdown() {
+        for (BlastPlayer p : Main.players) {
+            NMSTitle.sendTitle(p.getPlayer(), "§e3", "", 0, 30, 0);
         }
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                for (BlastPlayer p : Main.players) {
+                    NMSTitle.sendTitle(p.getPlayer(), "§62", "", 0, 30, 0);
+                }
+            }
+        }.runTaskLater(Main.getPlugin(Main.class), 20L);
+
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                for (BlastPlayer p : Main.players) {
+                    NMSTitle.sendTitle(p.getPlayer(), "§c1", "", 0, 20, 0);
+                }
+            }
+        }.runTaskLater(Main.getPlugin(Main.class), 40L);
+    }
+
+    public static void startGame(String worldName) {
+        countdown();
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                Main.gameTime = 0;
+                Main.gameRunning = true;
+                Utils.loadRespawn(worldName);
+                for (BlastPlayer bp : Main.players) {
+                    bp.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100000, 2, false, false));
+                    bp.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 100000, 1, false, false));
+                    resetPlayer(bp);
+                    Utils.giveItem(bp.getPlayer(), false);
+                }
+            }
+        }.runTaskLater(Main.getPlugin(Main.class), 60L);
     }
 
     public static void endGame() {
