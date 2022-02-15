@@ -5,9 +5,6 @@ import com.blackoutburst.fireblast.main.Main;
 import com.blackoutburst.fireblast.utils.Utils;
 import org.bukkit.command.CommandSender;
 
-import java.io.File;
-import java.util.Random;
-
 public class CommandStart {
 
     public void execute(CommandSender sender, String[] args) {
