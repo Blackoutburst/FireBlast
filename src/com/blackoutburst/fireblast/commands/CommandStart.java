@@ -2,6 +2,7 @@ package com.blackoutburst.fireblast.commands;
 
 import com.blackoutburst.fireblast.core.Core;
 import com.blackoutburst.fireblast.main.Main;
+import com.blackoutburst.fireblast.utils.Utils;
 import org.bukkit.command.CommandSender;
 
 import java.io.File;
@@ -21,38 +22,10 @@ public class CommandStart {
             return;
         }
 
-        StringBuilder worldName = new StringBuilder();
-
-        for (String s : args) {
-            worldName.append(s).append(" ");
-        }
-
-        worldName = new StringBuilder(worldName.substring(0, worldName.length() - 1).toLowerCase());
-
-        if (worldName.toString().equals("random")) {
-            File index = new File("./plugins/FireBlast/");
-            File[] entries = index.listFiles();
-
-            Core.startGame(entries[new Random().nextInt(entries.length)].getName().replace(".yml", ""));
-
-            return;
-        }
-
-        File index = new File("./plugins/FireBlast/");
-        File[] entries = index.listFiles();
-        String finalWorldName = null;
-
-        if (entries == null) return;
-
-        for(File s: entries) {
-            if (s.getName().contains("_spawn")) continue;
-            if (s.getName().replace(".yml", "").equalsIgnoreCase(worldName.toString())) {
-                finalWorldName = s.getName().replace(".yml", "");
-            }
-        }
+        String finalWorldName = Utils.getWorldName(args);
 
         if (finalWorldName == null) {
-            sender.sendMessage("§cThe world §f"+worldName+"§c doesn't exist!");
+            sender.sendMessage("§cThis world doesn't exist!");
             return;
         }
 

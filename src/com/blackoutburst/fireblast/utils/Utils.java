@@ -30,6 +30,30 @@ import java.util.Set;
 
 public class Utils {
 
+    public static String getWorldName(String[] args) {
+        StringBuilder worldName = new StringBuilder();
+
+        for (String s : args) {
+            worldName.append(s).append(" ");
+        }
+
+        worldName = new StringBuilder(worldName.substring(0, worldName.length() - 1).toLowerCase());
+
+        File index = new File("./plugins/FireBlast/");
+        File[] entries = index.listFiles();
+        String finalWorldName = null;
+
+        if (entries == null) return null;
+
+        for(File s: entries) {
+            if (s.getName().contains("_spawn")) continue;
+            if (s.getName().replace(".yml", "").equalsIgnoreCase(worldName.toString())) {
+                finalWorldName = s.getName().replace(".yml", "");
+            }
+        }
+        return finalWorldName;
+    }
+
     public static void reloadWorld(World w) {
         final List<BlockMap> blocks = new ArrayList<>();
 
