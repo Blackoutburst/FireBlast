@@ -122,6 +122,7 @@ public class Main extends JavaPlugin implements Listener {
             case "end": new CommandEnd().execute(); break;
             case "scan": new CommandScan().execute(sender, args); break;
             case "reloadworld": new CommandReloadWorld().execute(sender, args); break;
+            case "loadspawn": new CommandLoadSpawn().execute(sender, args); break;
             case "spawnwand": new CommandSpawnWand().execute(sender); break;
             default: return (true);
         }

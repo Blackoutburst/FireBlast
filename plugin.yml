@@ -21,6 +21,10 @@ commands:
     permission: firebalst.admin
     description: reload the map
     usage: /reloadWorld <world>
+  loadSpawn:
+    permission: firebalst.admin
+    description: load a world spawnspoints
+    usage: /loadspawn <world>
   spawnWand:
     permission: firebalst.admin
     description: Give you the spawnwand
