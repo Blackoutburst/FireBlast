@@ -11,8 +11,8 @@ Shoot explosive beam with right click and jump/dash in the direction you are fac
 
 ## Important
 Before starting a game a world require:
-- A complete world scan for reloading the map after the game
-- At least 1 spawnpoint created using the spawnwand
+  - A complete world scan for reloading the map after the game
+  - At least 1 spawnpoint created using the spawnwand
 
 ## Commands
 `/start <worldName>` Start the game\
