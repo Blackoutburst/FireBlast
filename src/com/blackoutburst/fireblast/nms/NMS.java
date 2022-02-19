@@ -3,6 +3,8 @@ package com.blackoutburst.fireblast.nms;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import java.lang.reflect.Field;
+
 public class NMS {
 
     public static Class<?> getClass(String name) {
@@ -21,6 +23,17 @@ public class NMS {
 
             playerConnection.getClass().getMethod("sendPacket", getClass("Packet")).invoke(playerConnection, packet);
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void setField(Object edit, String fieldName, Object value) {
+        try {
+            final Field field = edit.getClass().getDeclaredField(fieldName);
+
+            field.setAccessible(true);
+            field.set(edit, value);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();
         }
     }

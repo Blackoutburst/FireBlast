@@ -1,8 +1,8 @@
 package com.blackoutburst.fireblast.core;
 
 import com.blackoutburst.fireblast.main.Main;
+import com.blackoutburst.fireblast.nms.NMSParticles;
 import com.blackoutburst.fireblast.utils.Utils;
-import net.minecraft.server.v1_8_R3.EnumParticle;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -53,7 +53,7 @@ public class SpawnWand {
 
         Main.respawns.add(s);
         Utils.saveSpawns(p.getWorld().getName());
-        Utils.spawnParticleCubeCustom(b, p, EnumParticle.VILLAGER_HAPPY);
+        Utils.spawnParticleCubeCustom(b, p, NMSParticles.ParticleType.VILLAGER_HAPPY);
         p.sendMessage("§aNew spawn created at location §b("+b.getX()+", "+b.getY()+", "+b.getZ()+")");
     }
 
@@ -61,7 +61,7 @@ public class SpawnWand {
         Location s = Utils.getSpawn(b.getLocation());
         Main.respawns.remove(s);
         Utils.saveSpawns(p.getWorld().getName());
-        Utils.spawnParticleCubeCustom(b, p, EnumParticle.FLAME);
+        Utils.spawnParticleCubeCustom(b, p, NMSParticles.ParticleType.FLAME);
         p.sendMessage("§cSpawn removed at location §b("+b.getX()+", "+b.getY()+", "+b.getZ()+")");
     }
 

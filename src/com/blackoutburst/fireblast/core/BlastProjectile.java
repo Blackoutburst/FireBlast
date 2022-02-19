@@ -1,14 +1,11 @@
 package com.blackoutburst.fireblast.core;
 
 import com.blackoutburst.fireblast.main.Main;
+import com.blackoutburst.fireblast.nms.NMSParticles;
 import com.blackoutburst.fireblast.utils.Utils;
-import net.minecraft.server.v1_8_R3.EnumParticle;
-import net.minecraft.server.v1_8_R3.PacketPlayOutWorldParticles;
-import net.minecraft.server.v1_8_R3.PlayerConnection;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.util.Vector;
 
 public class BlastProjectile {
@@ -43,10 +40,8 @@ public class BlastProjectile {
                 for (int z = location.getBlockZ() - 1; z <= location.getBlockZ() + 1; z++)
                     location.getWorld().getBlockAt(new Location(location.getWorld(), x, y, z)).setType(Material.AIR);
         location.getWorld().playSound(location, Sound.EXPLODE, 3, 1);
-        for (final BlastPlayer bp : Main.players) {
-            final PlayerConnection connection = ((CraftPlayer) bp.player).getHandle().playerConnection;
-            connection.sendPacket(new PacketPlayOutWorldParticles(EnumParticle.EXPLOSION_LARGE, true, xloc, yloc, zloc, 0, 0, 0, 0, 1));
-        }
+        for (final BlastPlayer bp : Main.players)
+            NMSParticles.send(bp.player, NMSParticles.ParticleType.EXPLOSION_LARGE, xloc, yloc, zloc, 0, 0, 0, 1);
     }
 
     private void trail() {
@@ -55,10 +50,9 @@ public class BlastProjectile {
         final float zloc = (float) this.location.getZ();
 
         for (final BlastPlayer bp : Main.players) {
-            final PlayerConnection connection = ((CraftPlayer) bp.player).getHandle().playerConnection;
-            connection.sendPacket(new PacketPlayOutWorldParticles(EnumParticle.FIREWORKS_SPARK, true, xloc, yloc, zloc, 0, 0, 0, 0, 1));
+            NMSParticles.send(bp.player, NMSParticles.ParticleType.FIREWORKS_SPARK, xloc, yloc, zloc, 0, 0, 0, 1);
             if (circle > 3) {
-                Utils.createCircle(connection, location);
+                Utils.createCircle(bp.player, location);
             }
         }
         if (circle > 3) {

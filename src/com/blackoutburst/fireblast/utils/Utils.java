@@ -3,10 +3,8 @@ package com.blackoutburst.fireblast.utils;
 import com.blackoutburst.fireblast.core.BlastPlayer;
 import com.blackoutburst.fireblast.core.BlockMap;
 import com.blackoutburst.fireblast.main.Main;
+import com.blackoutburst.fireblast.nms.NMSParticles;
 import net.md_5.bungee.api.ChatColor;
-import net.minecraft.server.v1_8_R3.EnumParticle;
-import net.minecraft.server.v1_8_R3.PacketPlayOutWorldParticles;
-import net.minecraft.server.v1_8_R3.PlayerConnection;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -14,7 +12,6 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -126,7 +123,7 @@ public class Utils {
         }
     }
 
-    public static void createCircle(PlayerConnection connection, Location location) {
+    public static void createCircle(Player player, Location location) {
         for (int i = 9; i > 0; i--) {
             final double angle = 2 * Math.PI * i / 9;
             final double x = Math.cos(angle) * 0.3f;
@@ -137,7 +134,7 @@ public class Utils {
 
             final Location temp = location.clone().add(v);
 
-            connection.sendPacket(new PacketPlayOutWorldParticles(EnumParticle.FLAME, true, (float) temp.getX(), (float) temp.getY(), (float) temp.getZ(), 0, 0, 0, 0, 1));
+            NMSParticles.send(player, NMSParticles.ParticleType.FLAME, (float) temp.getX(), (float) temp.getY(), (float) temp.getZ(), 0, 0, 0, 1);
         }
     }
 
@@ -212,76 +209,74 @@ public class Utils {
         return (null);
     }
 
-    public static void spawnParticleCubeCustom(Block b, Player p, EnumParticle part) {
-        final PlayerConnection connection = ((CraftPlayer) p).getHandle().playerConnection;
+    public static void spawnParticleCubeCustom(Block b, Player p, NMSParticles.ParticleType part) {
         final float nb = 0.2f;
         float x = b.getX();
         float y = b.getY();
         float z = b.getZ();
 
         for (float i = 0; i < 1; i += nb)
-            connection.sendPacket(new PacketPlayOutWorldParticles(part, true, x + i, y, z, 0, 0, 0, 0, 1));
+            NMSParticles.send(p, part, x + i, y, z, 0, 0, 0, 1);
         for (float i = 0; i < 1; i += nb)
-            connection.sendPacket(new PacketPlayOutWorldParticles(part, true, x, y + i, z, 0, 0, 0, 0, 1));
+            NMSParticles.send(p, part, x, y + i, z, 0, 0, 0, 1);
         for (float i = 0; i < 1; i += nb)
-            connection.sendPacket(new PacketPlayOutWorldParticles(part, true, x, y, z + i, 0, 0, 0, 0, 1));
+            NMSParticles.send(p, part, x, y, z + i, 0, 0, 0, 1);
 
         x = b.getX() + 1;
         y = b.getY() + 1;
         z = b.getZ() + 1;
 
         for (float i = 0; i < 1; i += nb)
-            connection.sendPacket(new PacketPlayOutWorldParticles(part, true, x - i, y, z, 0, 0, 0, 0, 1));
+            NMSParticles.send(p, part, x - i, y, z, 0, 0, 0, 1);
         for (float i = 0; i < 1; i += nb)
-            connection.sendPacket(new PacketPlayOutWorldParticles(part, true, x, y - i, z, 0, 0, 0, 0, 1));
+            NMSParticles.send(p, part, x, y - i, z, 0, 0, 0, 1);
         for (float i = 0; i < 1; i += nb)
-            connection.sendPacket(new PacketPlayOutWorldParticles(part, true, x, y, z - i, 0, 0, 0, 0, 1));
+            NMSParticles.send(p, part, x, y, z - i, 0, 0, 0, 1);
 
         x = b.getX() + 1;
         y = b.getY() + 1;
         z = b.getZ();
 
         for (float i = 0; i < 1; i += 0.2f)
-            connection.sendPacket(new PacketPlayOutWorldParticles(part, true, x - i, y, z, 0, 0, 0, 0, 1));
+            NMSParticles.send(p, part, x - i, y, z, 0, 0, 0, 1);
         for (float i = 0; i < 1; i += 0.2f)
-            connection.sendPacket(new PacketPlayOutWorldParticles(part, true, x, y - i, z, 0, 0, 0, 0, 1));
+            NMSParticles.send(p, part, x, y - i, z, 0, 0, 0, 1);
 
         x = b.getX() + 1;
         y = b.getY();
         z = b.getZ() + 1;
 
         for (float i = 0; i < 1; i += nb)
-            connection.sendPacket(new PacketPlayOutWorldParticles(part, true, x - i, y, z, 0, 0, 0, 0, 1));
+            NMSParticles.send(p, part, x - i, y, z, 0, 0, 0, 1);
         for (float i = 0; i < 1; i += nb)
-            connection.sendPacket(new PacketPlayOutWorldParticles(part, true, x, y, z - 1, 0, 0, 0, 0, 1));
+            NMSParticles.send(p, part, x, y, z - 1, 0, 0, 0, 1);
 
         x = b.getX();
         y = b.getY() + 1;
         z = b.getZ() + 1;
 
         for (float i = 0; i < 1; i += nb)
-            connection.sendPacket(new PacketPlayOutWorldParticles(part, true, x, y - i, z, 0, 0, 0, 0, 1));
+            NMSParticles.send(p, part, x, y - i, z, 0, 0, 0, 1);
         for (float i = 0; i < 1; i += nb)
-            connection.sendPacket(new PacketPlayOutWorldParticles(part, true, x, y, z - 1, 0, 0, 0, 0, 1));
+            NMSParticles.send(p, part, x, y, z - 1, 0, 0, 0, 1);
 
         x = b.getX() + 1;
         y = b.getY();
         z = b.getZ();
 
         for (float i = 0; i < 1; i += nb)
-            connection.sendPacket(new PacketPlayOutWorldParticles(part, true, x, y, z + i, 0, 0, 0, 0, 1));
+            NMSParticles.send(p, part, x, y, z + i, 0, 0, 0, 1);
 
         x = b.getX();
         y = b.getY() + 1;
         z = b.getZ();
 
         for (float i = 0; i < 1; i += nb)
-            connection.sendPacket(new PacketPlayOutWorldParticles(part, true, x, y, z + i, 0, 0, 0, 0, 1));
+            NMSParticles.send(p, part, x, y, z + i, 0, 0, 0, 1);
     }
 
     public static void spawnRotationLine(Location s, Player p) {
-        final PlayerConnection connection = ((CraftPlayer) p).getHandle().playerConnection;
-        final EnumParticle part = EnumParticle.CRIT_MAGIC;
+        final NMSParticles.ParticleType part = NMSParticles.ParticleType.CRIT_MAGIC;
         final float nb = 0.1f;
         float x = (float)s.getX();
         float y = (float)s.getY();
@@ -290,35 +285,35 @@ public class Utils {
         switch ((int)(s.getYaw())) {
             case 45:
                 for (float i = 0; i <= 0.5f; i += nb)
-                    connection.sendPacket(new PacketPlayOutWorldParticles(part, true, x - i, y + 0.5f, z + i, 0, 0, 0, 0, 1));
+                    NMSParticles.send(p, part, x - i, y + 0.5f, z + i, 0, 0, 0, 1);
                 break;
             case 90:
                 for (float i = 0; i <= 0.5f; i += nb)
-                    connection.sendPacket(new PacketPlayOutWorldParticles(part, true, x - i, y + 0.5f, z, 0, 0, 0, 0, 1));
+                    NMSParticles.send(p, part, x - i, y + 0.5f, z,0, 0, 0, 1);
                 break;
             case 135:
                 for (float i = 0; i <= 0.5f; i += nb)
-                    connection.sendPacket(new PacketPlayOutWorldParticles(part, true, x - i, y + 0.5f, z - i, 0, 0, 0, 0, 1));
+                    NMSParticles.send(p, part, x - i, y + 0.5f, z - i,0, 0, 0, 1);
                 break;
             case 180:
                 for (float i = 0; i <= 0.5f; i += nb)
-                    connection.sendPacket(new PacketPlayOutWorldParticles(part, true, x, y + 0.5f, z - i, 0, 0, 0, 0, 1));
+                    NMSParticles.send(p, part, x, y + 0.5f, z - i,0, 0, 0, 1);
                 break;
             case 225:
                 for (float i = 0; i <= 0.5f; i += nb)
-                    connection.sendPacket(new PacketPlayOutWorldParticles(part, true, x + i, y + 0.5f, z - i, 0, 0, 0, 0, 1));
+                    NMSParticles.send(p, part, x + i, y + 0.5f, z - i,0, 0, 0, 1);
                 break;
             case 270:
                 for (float i = 0; i <= 0.5f; i += nb)
-                    connection.sendPacket(new PacketPlayOutWorldParticles(part, true, x + i, y + 0.5f, z, 0, 0, 0, 0, 1));
+                    NMSParticles.send(p, part, x + i, y + 0.5f, z,0, 0, 0, 1);
                 break;
             case 315:
                 for (float i = 0; i <= 0.5f; i += nb)
-                    connection.sendPacket(new PacketPlayOutWorldParticles(part, true, x + i, y + 0.5f, z + i, 0, 0, 0, 0, 1));
+                    NMSParticles.send(p, part, x + i, y + 0.5f, z + i,0, 0, 0, 1);
                 break;
             default:
                 for (float i = 0; i <= 0.5f; i += nb)
-                    connection.sendPacket(new PacketPlayOutWorldParticles(part, true, x, y + 0.5f, z + i, 0, 0, 0, 0, 1));
+                    NMSParticles.send(p, part, x, y + 0.5f, z + i,0, 0, 0, 1);
                 break;
 
         }
@@ -331,7 +326,7 @@ public class Utils {
                     Math.pow(s.getZ() - p.getLocation().getZ(), 2) > 1000)
                 continue;
 
-            spawnParticleCubeCustom(p.getWorld().getBlockAt(s), p, EnumParticle.CRIT);
+            spawnParticleCubeCustom(p.getWorld().getBlockAt(s), p, NMSParticles.ParticleType.CRIT);
             spawnRotationLine(s, p);
         }
     }
