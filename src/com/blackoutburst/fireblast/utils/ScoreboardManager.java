@@ -2,7 +2,6 @@ package com.blackoutburst.fireblast.utils;
 
 import com.blackoutburst.fireblast.core.BlastPlayer;
 import com.blackoutburst.fireblast.main.Main;
-import com.blackoutburst.fireblast.nms.NMSScoreboard;
 
 import java.util.ArrayList;
 
