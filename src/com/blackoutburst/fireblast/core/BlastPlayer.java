@@ -1,13 +1,13 @@
 package com.blackoutburst.fireblast.core;
 
 import com.blackoutburst.fireblast.main.Main;
-import com.blackoutburst.fireblast.utils.Board;
+import com.blackoutburst.fireblast.utils.NMSBoard;
 import org.bukkit.entity.Player;
 
 public class BlastPlayer {
 
     protected Player player;
-    protected Board board;
+    protected NMSBoard board;
     protected boolean alive;
     protected int shootCooldown;
     protected int dashCooldown;
@@ -22,11 +22,11 @@ public class BlastPlayer {
     public Player getPlayer() {
         return player;
     }
-    public Board getBoard() {
+    public NMSBoard getBoard() {
         return board;
     }
 
-    public void setBoard(Board board) {
+    public void setBoard(NMSBoard board) {
         this.board = board;
     }
 

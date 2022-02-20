@@ -164,7 +164,7 @@ public class Core {
         final String time = String.format("%d:%02d", minutes, seconds);
 
         for (BlastPlayer p : Main.players) {
-            p.getBoard().set(14, "Time: §a"+time);
+            p.getBoard().set(p.getPlayer(),14, "Time: §a"+time);
         }
     }
 
