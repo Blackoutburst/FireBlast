@@ -1,3 +1,5 @@
+![f](https://user-images.githubusercontent.com/30992311/156935710-650a373a-1c00-4483-b139-c4d043dac4fb.png)
+
 [![License](https://img.shields.io/github/license/Blackoutburst/FireBlast.svg)](LICENSE)
 [![Release](https://img.shields.io/github/release/Blackoutburst/FireBlast.svg)](https://github.com/Blackoutburst/FireBlast/releases)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/377955dafdca4f6a9f4dcb9825160eaa)](https://www.codacy.com/gh/Blackoutburst/FireBlast/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Blackoutburst/FireBlast&amp;utm_campaign=Badge_Grade)
