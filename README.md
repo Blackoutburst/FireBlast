@@ -16,7 +16,7 @@ Before starting a game a world require:
   - A complete world scan for reloading the map after the game
   - At least 1 spawnpoint created using the spawnwand
 
-This plugin was made in 1.8.9 and I have no idea if it work in newer version of the game as I didn't tested
+This plugin was made in 1.8.9
 
 ## Commands
 `/start <worldName>` Start the game\
